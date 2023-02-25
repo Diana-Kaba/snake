@@ -4,10 +4,6 @@ let colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Lime"];
 // let pickRandomColor = function (colors) {
 //   return colors[Math.floor(Math.random() * colors.length)];
 // };
-function pickRandomColor(colors) {
-  let random = Math.floor(Math.random * colors.length);
-  return colors[random];
-}
 
 class Block {
   constructor(canvas, col = 0, row = 0, blockSize = 10, colors = ["Blue"]) {
@@ -82,7 +78,10 @@ class Snake {
     this.canvas = canvas;
     this.direction = "right";
     this.nextDirection = "right";
-    this.color = pickRandomColor();
+    this.color = function pickRandomColor(colors) {
+      let random = Math.floor(Math.random * colors.length);
+      return colors[random];
+    };
   }
 
   draw = function () {
