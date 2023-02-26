@@ -1,9 +1,9 @@
 const canvas = document.getElementById("canvas");
-let colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Lime"];
+const colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Lime"];
 
-// let pickRandomColor = function (colors) {
-//   return colors[Math.floor(Math.random() * colors.length)];
-// };
+let pickRandomColor = function (colors) {
+  return colors[Math.floor(Math.random() * colors.length)];
+};
 
 class Block {
   constructor(canvas, col = 0, row = 0, blockSize = 10, colors = ["Blue"]) {
@@ -49,6 +49,7 @@ class Apple {
   constructor(canvas) {
     this.block = new Block(canvas, 10, 10);
     this.canvas = canvas;
+    this.color = pickRandomColor(colors);
   }
 
   //   draw() {
@@ -56,7 +57,7 @@ class Apple {
   //   }
 
   draw = function () {
-    this.block.drawCircle("LimeGreen");
+    this.block.drawCircle(this.color);
   };
 
   move() {
@@ -78,10 +79,7 @@ class Snake {
     this.canvas = canvas;
     this.direction = "right";
     this.nextDirection = "right";
-    this.color = function pickRandomColor(colors) {
-      let random = Math.floor(Math.random * colors.length);
-      return colors[random];
-    };
+    this.color = pickRandomColor(colors);
   }
 
   draw = function () {
@@ -114,6 +112,7 @@ class Snake {
 
     if (newHead.equal(apple.block)) {
       // score++;
+      this.color = apple.color;
       game.score++;
       apple.move();
     } else {
